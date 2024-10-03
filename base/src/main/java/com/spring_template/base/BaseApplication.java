@@ -1,13 +1,13 @@
-package com.spring_template.crm;
+package com.spring_template.base;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CrmApplication {
+public class BaseApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CrmApplication.class, args);
+        SpringApplication.run(BaseApplication.class, args);
     }
 
 }

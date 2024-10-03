@@ -1,10 +1,10 @@
-package com.spring_template.crm;
+package com.spring_template.base;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CrmApplicationTests {
+class BaseApplicationTests {
 
     @Test
     void contextLoads() {
