@@ -1,0 +1,20 @@
+body {
+    background-color:#1e96fc; /* Bootstrap primary blue */
+    color: #fff; /* Text color for better contrast on the blue background */
+
+}
+.navbar-nav .nav-link {
+    font-size: 18px;
+}
+.container {
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+.cdClass{
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+
