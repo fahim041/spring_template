@@ -21,7 +21,7 @@ public class Course {
     private Date createdDate;
     private Date updatedDate;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<Student> students;
+    private List<Enrollment> students;
 
     public static class CourseMapper implements RowMapper<Course>{
 

@@ -20,7 +20,7 @@ public class Student {
     private String name;
     private String email;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<EnrolledCourse> enrolledCourses;
+    private List<Enrollment> enrolledCourses;
 
     public static class StudentMapper implements RowMapper<Student> {
         @Override

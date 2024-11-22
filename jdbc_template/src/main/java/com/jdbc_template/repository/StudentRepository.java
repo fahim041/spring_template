@@ -1,7 +1,7 @@
 package com.jdbc_template.repository;
 
 import com.jdbc_template.entity.Course;
-import com.jdbc_template.entity.EnrolledCourse;
+import com.jdbc_template.entity.Enrollment;
 import com.jdbc_template.entity.Student;
 import com.jdbc_template.exception.DuplicateEmailException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -64,7 +64,7 @@ public class StudentRepository {
 
         List<Student> students = jdbcTemplate.query(sql, new Object[]{id}, (rs, rowNum) -> {
             Student student = null;
-            List<EnrolledCourse> enrolledCourses = new ArrayList<>();
+            List<Enrollment> enrolledCourses = new ArrayList<>();
 
             student = new Student();
             student.setId(rs.getInt("student_id"));
@@ -72,7 +72,6 @@ public class StudentRepository {
             student.setEmail(rs.getString("student_email"));
 
             do {
-                // For each row, create a Course object
                 Course course = new Course();
                 course.setId(rs.getInt("course_id"));
                 course.setName(rs.getString("course_name"));
@@ -80,18 +79,15 @@ public class StudentRepository {
                 if(rs.getTimestamp("course_created") != null)
                     course.setCreatedDate(new Timestamp(rs.getTimestamp("course_created").getTime()));
 
-                // Create an Enrollment object to hold the course and enrollment date
-                EnrolledCourse enrollment = new EnrolledCourse();
+                Enrollment enrollment = new Enrollment();
                 enrollment.setCourse(course);
                 enrollment.setEnrollmentDate(rs.getTimestamp("enrollment_date"));
 
-                // Add to the list of enrolled courses
                 if(rs.getInt("course_id") > 0) {
                     enrolledCourses.add(enrollment);
                 }
-            } while (rs.next()); // Continue to process the next rows, if any
+            } while (rs.next());
 
-            // Assign the list of enrolled courses to the student
             if(!enrolledCourses.isEmpty())
                 student.setEnrolledCourses(enrolledCourses);
 
