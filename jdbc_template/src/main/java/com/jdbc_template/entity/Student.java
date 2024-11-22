@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -17,6 +18,7 @@ public class Student {
     private int id;
     private String name;
     private String email;
+    private List<EnrolledCourse> enrolledCourses;
 
     public static class StudentMapper implements RowMapper<Student> {
         @Override

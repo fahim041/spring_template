@@ -3,6 +3,7 @@ package com.jdbc_template.controller;
 import com.jdbc_template.entity.Student;
 import com.jdbc_template.exception.NotFoundException;
 import com.jdbc_template.service.StudentService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +29,13 @@ public class StudentController {
 
     @GetMapping("/students/{id}")
     public Student getStudent(@PathVariable("id") int id){
-        return studentService.getStudent(id);
+        Student student = studentService.getStudent(id);
+
+        if(student == null){
+            throw new NotFoundException("Student not found with id: " + id);
+        }
+
+        return student;
     }
 
     @PutMapping("/students/{id}")
