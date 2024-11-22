@@ -3,13 +3,13 @@ package com.jdbc_template.exception;
 public class GlobalErrorResponse {
     private int status;
     private String message;
-    private long timestamp;
+    private String timestamp;
 
     public GlobalErrorResponse(){
 
     }
 
-    public GlobalErrorResponse(int status, String message, long timestamp) {
+    public GlobalErrorResponse(int status, String message, String timestamp) {
         this.status = status;
         this.message = message;
         this.timestamp = timestamp;
@@ -31,11 +31,11 @@ public class GlobalErrorResponse {
         this.message = message;
     }
 
-    public long getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 }

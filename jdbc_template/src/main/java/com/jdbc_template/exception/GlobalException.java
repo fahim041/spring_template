@@ -5,8 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.time.Instant;
-import java.time.LocalTime;
+import java.sql.Timestamp;
 
 @ControllerAdvice
 public class GlobalException {
@@ -17,7 +16,7 @@ public class GlobalException {
 
         error.setStatus(HttpStatus.BAD_REQUEST.value());
         error.setMessage(ex.getMessage());
-        error.setTimestamp(System.currentTimeMillis());
+        error.setTimestamp(new Timestamp(System.currentTimeMillis()).toString());
 
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
@@ -28,7 +27,7 @@ public class GlobalException {
 
         error.setStatus(HttpStatus.BAD_REQUEST.value());
         error.setMessage(duplicateEmailException.getMessage());
-        error.setTimestamp(Instant.now().toEpochMilli());
+        error.setTimestamp(new Timestamp(System.currentTimeMillis()).toString());
 
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
@@ -39,7 +38,7 @@ public class GlobalException {
 
         error.setStatus(HttpStatus.BAD_REQUEST.value());
         error.setMessage(ex.getMessage());
-        error.setTimestamp(System.currentTimeMillis());
+        error.setTimestamp(new Timestamp(System.currentTimeMillis()).toString());
 
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
