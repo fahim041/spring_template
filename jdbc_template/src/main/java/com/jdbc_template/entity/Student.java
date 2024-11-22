@@ -1,5 +1,6 @@
 package com.jdbc_template.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public class Student {
     private int id;
     private String name;
     private String email;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<EnrolledCourse> enrolledCourses;
 
     public static class StudentMapper implements RowMapper<Student> {

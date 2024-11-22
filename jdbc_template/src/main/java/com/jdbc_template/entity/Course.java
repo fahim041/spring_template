@@ -1,5 +1,6 @@
 package com.jdbc_template.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -18,6 +20,8 @@ public class Course {
     private String description;
     private Date createdDate;
     private Date updatedDate;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<Student> students;
 
     public static class CourseMapper implements RowMapper<Course>{
 

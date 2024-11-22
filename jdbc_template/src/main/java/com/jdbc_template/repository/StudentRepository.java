@@ -55,6 +55,7 @@ public class StudentRepository {
         
         String sql = "SELECT s.id AS student_id, s.name AS student_name, s.email AS student_email, " +
                 "c.id AS course_id, c.name AS course_name, c.description AS course_description, " +
+                "c.created_date AS course_created, " +
                 "e.created_date AS enrollment_date " +
                 "FROM student s " +
                 "LEFT JOIN enrollment e ON s.id = e.student_id " +
@@ -76,6 +77,8 @@ public class StudentRepository {
                 course.setId(rs.getInt("course_id"));
                 course.setName(rs.getString("course_name"));
                 course.setDescription(rs.getString("course_description"));
+                if(rs.getTimestamp("course_created") != null)
+                    course.setCreatedDate(new Timestamp(rs.getTimestamp("course_created").getTime()));
 
                 // Create an Enrollment object to hold the course and enrollment date
                 EnrolledCourse enrollment = new EnrolledCourse();
