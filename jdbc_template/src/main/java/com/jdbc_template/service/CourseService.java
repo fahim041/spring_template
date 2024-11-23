@@ -33,4 +33,13 @@ public class CourseService {
     public boolean deleteStudent(int id){
         return courseRepository.delete(id);
     }
+
+    public boolean enrollCourse(int courseId, int studentId){
+        boolean alreadyEnrolled = courseRepository.checkAlreadyEnrolled(courseId, studentId);
+
+        if(alreadyEnrolled)
+            throw new RuntimeException("Student is already enrolled in this course");
+
+        return courseRepository.enroll(courseId, studentId);
+    }
 }

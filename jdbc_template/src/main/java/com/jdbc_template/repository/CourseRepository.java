@@ -61,7 +61,7 @@ public class CourseRepository {
                 "LEFT JOIN student s ON e.student_id = s.id " +
                 "WHERE c.id = ?";
 
-        List<Course> courses = jdbcTemplate.query(sql, new Object[]{id}, (rs, rowNum) -> {
+        List<Course> courses = jdbcTemplate.query(sql, (rs, rowNum) -> {
             Course course = new Course();
             List<Enrollment> students = new ArrayList<>();
 
@@ -93,7 +93,7 @@ public class CourseRepository {
             }
 
             return course;
-        });
+        }, new Object[]{id});
 
         if(courses.isEmpty()){
             return null;
@@ -120,6 +120,22 @@ public class CourseRepository {
         String sql = "DELETE FROM course WHERE id = ?";
 
         int rowsAffected = jdbcTemplate.update(sql, id);
+
+        return rowsAffected > 0;
+    }
+
+    // return true if already enrolled
+    public boolean checkAlreadyEnrolled(int courseId, int studentId){
+        String checkEnrollmentSql = "SELECT count(*) AS student_count FROM enrollment WHERE student_id = ? AND course_id = ?";
+
+        List<Integer> countList = jdbcTemplate.query(checkEnrollmentSql, (rs, rowNum) -> rs.getInt("student_count"), new Object[]{studentId, courseId});
+
+        return countList.get(0) > 0;
+    }
+
+    public boolean enroll(int courseId, int studentId){
+        String enrollSql = "INSERT INTO enrollment(student_id, course_id, created_date) VALUES(?, ?, ?)";
+        int rowsAffected = jdbcTemplate.update(enrollSql, studentId, courseId, new Timestamp(System.currentTimeMillis()));
 
         return rowsAffected > 0;
     }
